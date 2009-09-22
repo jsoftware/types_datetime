@@ -1,16 +1,16 @@
 NB. =========================================================
 NB. Verbs for date and time arithmetic
 
-NB.*tsplus v Adds time (y) to timestamp (x)
-NB. eg: 2009 2 28 20 30 0 tsplus 5 0 0     NB. add 5 hours to timestamp
-NB. eg: 2009 2 28 20 30 0 tsplus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
+NB.*tsPlus v Adds time (y) to timestamp (x)
+NB. eg: 2009 2 28 20 30 0 tsPlus 5 0 0     NB. add 5 hours to timestamp
+NB. eg: 2009 2 28 20 30 0 tsPlus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
 NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
 NB. y is: array of numeric time(s) to add to x. Format: [[[[[Y] M] D] h] m] s
 NB. x is: array of numeric timestamps to add y to. Format: Y [M [D [h [m [s]]]]]
 tsPlus=: [: toDateTime@toDayNumber (6&{.@[ + _6&{.@])"1
 
-NB.*tsminus v Subtract time (y) from timestamp (x)
-NB. eg: 2009 3 1 1 30 0 tsminus 5 0 0   NB. subtract 5 hours from timestamp
+NB.*tsMinus v Subtract time (y) from timestamp (x)
+NB. eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
 NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
 NB. y is: array of numeric time(s) to subtract from x. Format: [[[[[Y] M] D] h] m] s
 NB. x is: array of numeric timestamps to subtract y from. Format: Y [M [D [h [m [s]]]]]
