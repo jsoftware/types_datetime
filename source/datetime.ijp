@@ -1,0 +1,54 @@
+NB. project file: ~Addons/types/datetime/source/datetime
+
+coclass 'jproject'
+
+PRIMARYFILES=: 0 : 0
+~Addons/types/datetime/source/init
+~Addons/types/datetime/source/utils
+~Addons/types/datetime/source/dayno
+~Addons/types/datetime/source/arithmetic
+~Addons/types/datetime/source/formatout
+~Addons/types/datetime/source/formatin
+~Addons/types/datetime/source/timezone
+~Addons/types/datetime/source/zfns
+)
+
+PRIMARYLIBS=: 0 : 0
+dates
+dll
+numeric
+strings
+)
+
+DEVFILES=: ''
+
+DEVLIBS=: ''
+
+OTHERFILES=: 0 : 0
+~Addons/types/datetime/history.txt
+~Addons/types/datetime/source/ideas.txt
+~Addons/types/datetime/manifest.ijs
+~Addons/types/datetime/test_datetime.ijs
+)
+
+TARGETFILE=: '~Addons/types/datetime/datetime.ijs'
+
+TARGETLOCALE=: 'rgsdatetime'
+
+TARGETHEADER=: ''
+
+TARGETEXTRA=: ''
+
+BUILDOPTS=: 0 1 0 0 0 0 0
+
+PREBUILDFILE=: ''
+
+POSTBUILDFILE=: ''
+
+TESTFILE=: '~Addons/types/datetime/test_src.ijs'
+
+NOTES=: ''
+
+VERSION=: ''
+
+WINDOWS=: ''
