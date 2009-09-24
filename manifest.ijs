@@ -20,5 +20,5 @@ FILES=: 0 : 0
 history.txt
 manifest.ijs
 datetime.ijs
-test_datetime.ijs
+test/test_datetime.ijs
 )

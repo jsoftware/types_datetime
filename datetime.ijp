@@ -28,7 +28,7 @@ OTHERFILES=: 0 : 0
 ~Addons/types/datetime/history.txt
 ~Addons/types/datetime/source/ideas.txt
 ~Addons/types/datetime/manifest.ijs
-~Addons/types/datetime/test_datetime.ijs
+~Addons/types/datetime/test/test_datetime.ijs
 )
 
 TARGETFILE=: '~Addons/types/datetime/datetime.ijs'
@@ -45,7 +45,7 @@ PREBUILDFILE=: ''
 
 POSTBUILDFILE=: ''
 
-TESTFILE=: '~Addons/types/datetime/test_src.ijs'
+TESTFILE=: '~Addons/types/datetime/test/test_src.ijs'
 
 NOTES=: ''
 
