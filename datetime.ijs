@@ -1,4 +1,4 @@
-NB. built from project: ~Addons/types/datetime/source/datetime
+NB. built from project: ~Addons/types/datetime/datetime
 NB. =========================================================
 NB. Addon for extending the dates.ijs system script.
 NB. Ric Sherlock, 2009 09 09
