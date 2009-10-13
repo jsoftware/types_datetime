@@ -10,8 +10,8 @@ script_z_ '~system/main/dll.ijs'
 script_z_ '~system/main/numeric.ijs'
 script_z_ '~system/main/strings.ijs'
 
-coclass 'rgsdatetime'
 
+coclass 'rgsdatetime'
 
 NB. =========================================================
 NB. Constants

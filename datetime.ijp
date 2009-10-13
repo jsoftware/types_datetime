@@ -1,4 +1,4 @@
-NB. project file: ~Addons/types/datetime/datetime
+NB. project file: c:/users/rsherloc/documents/j602-user/jsrc/addons/types/datetime/datetime
 
 coclass 'jproject'
 
@@ -33,7 +33,7 @@ OTHERFILES=: 0 : 0
 
 TARGETFILE=: '~Addons/types/datetime/datetime.ijs'
 
-TARGETLOCALE=: 'rgsdatetime'
+TARGETLOCALE=: ''
 
 TARGETHEADER=: ''
 

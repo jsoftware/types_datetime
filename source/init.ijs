@@ -4,6 +4,8 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
+coclass 'rgsdatetime'
+
 NB. =========================================================
 NB. Constants
 
