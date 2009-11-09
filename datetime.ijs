@@ -5,11 +5,11 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-script_z_ '~system/main/dates.ijs'
-script_z_ '~system/main/dll.ijs'
-script_z_ '~system/main/numeric.ijs'
-script_z_ '~system/main/strings.ijs'
 
+require '~system/main/dates.ijs'
+require '~system/main/dll.ijs'
+require '~system/main/numeric.ijs'
+require '~system/main/strings.ijs'
 
 coclass 'rgsdatetime'
 
@@ -183,7 +183,7 @@ NB. eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
 NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
 NB. y is: array of numeric time(s) to subtract from x. Format: [[[[[Y] M] D] h] m] s
 NB. x is: array of numeric timestamps to subtract y from. Format: Y [M [D [h [m [s]]]]]
-tsMinus=: [ tsPlus -@]
+tsMinus=: tsPlus -
 
 NB.*daysDiff v Difference in days from timestamp y to timestamp x
 NB. form: endtimestamp daysDiff starttimestamp

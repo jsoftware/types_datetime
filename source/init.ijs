@@ -4,6 +4,11 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
+require '~system/main/dates.ijs'
+require '~system/main/dll.ijs'
+require '~system/main/numeric.ijs'
+require '~system/main/strings.ijs'
+
 coclass 'rgsdatetime'
 
 NB. =========================================================

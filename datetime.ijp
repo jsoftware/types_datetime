@@ -1,4 +1,4 @@
-NB. project file: ~Addons/types/datetime/datetime
+NB. project file: c:/users/rsherloc/documents/j602-user/jsrc/addons/types/datetime/datetime
 
 coclass 'jproject'
 
@@ -13,12 +13,7 @@ PRIMARYFILES=: 0 : 0
 ~Addons/types/datetime/source/zfns
 )
 
-PRIMARYLIBS=: 0 : 0
-dates
-dll
-numeric
-strings
-)
+PRIMARYLIBS=: ''
 
 DEVFILES=: ''
 
