@@ -40,7 +40,7 @@ NB.     d: 1    h: 1    m: 1    s: 1      c: 1       p: a
 NB.            hh: 01  mm: 01  ss: 01    cc: 01     pp: am
 NB.                           sss: 1.2  ccc: 001
 NB.     If no "p" designator is present, 24 hour format is used.
-NB.     To display any of the letters (DMY) that are codes, 
+NB.     To display any of the letters (dhmscp) that are codes, 
 NB.     "escape" them with '\'
 fmtTime=: 3 : 0
   'h:mm:ss pp' fmtTime y
