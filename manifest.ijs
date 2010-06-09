@@ -12,7 +12,7 @@ Extension of dates.ijs script.
 
 NB. VERSION=: '1.0.0'
 
-RELEASE=: 'j602 j701'
+RELEASE=: 'j602 701'
 
 PLATFORMS=: 'win linux darwin'
 
