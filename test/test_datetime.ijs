@@ -6,7 +6,7 @@ NB. To run all tests, select all file contents and choose Run|Selection
 
 Note 'To run all tests:'
  load 'types/datetime'
- load 'types/test/test_datetime'
+ load 'types/datetime/test/test_datetime'
 )
 
 NB. Test data

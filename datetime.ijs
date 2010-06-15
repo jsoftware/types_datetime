@@ -1,15 +1,11 @@
-NB. built from project: ~Addons/types/datetime/datetime
 NB. =========================================================
+NB. types/datetime
 NB. Addon for extending the dates.ijs system script.
 NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-
-require '~system/main/dates.ijs'
-require '~system/main/dll.ijs'
-require '~system/main/numeric.ijs'
-require '~system/main/strings.ijs'
+require 'dates dll strings numeric'
 
 coclass 'rgsdatetime'
 
@@ -32,7 +28,6 @@ WKDAYS=: ;:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'
 MONTHS=: ''; ;:'January February March April May June July August September October November December'
 DATECODES=: ;:'D DD DDD DDDD M MM MMM MMMM YY YYYY'
 TIMECODES=: ;:'d h hh m mm s ss sss c cc ccc p pp'
-
 NB. =========================================================
 NB. Utility verbs
 
@@ -98,8 +93,6 @@ getTimeFormats=: 3 : 0
   t=. (12<:24|1{dhms){ ;:'am pm'                 NB. am/pm
   values=. values,(1&{.&.> ,: ]) t
 )
-
-
 NB. =========================================================
 NB. Verbs for converting between dates and daynumbers
 
@@ -165,8 +158,6 @@ NB.*fromJulian v converts Julian day number to J day number
 NB. eg: fromJulian toJulian tDayNumber 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
 toJdayno=: -&J0Date
-
-
 NB. =========================================================
 NB. Verbs for date and time arithmetic
 
@@ -215,8 +206,6 @@ tsDiff=: 4 : 0
   end.
   ($y) $, r
 )
-
-
 NB. =========================================================
 NB. Verbs for formating string representations of Dates and Times
  
@@ -312,14 +301,10 @@ NB.    * decimal: YYY, MMM, DDD, hhh, mmm, sss
 NB.    * round (to nearest unit): YY, MM, DD, hh, mm, ss
 NB.    * truncate (only complete units): Y, M, D, h, m, s
 NB.!! TO DO
-
-
 NB. =========================================================
 NB. Verbs for reading string representations of Dates and Times
 
 NB.!! to do
-
-
 NB. =========================================================
 NB. Verbs for working with time zones
 require 'dll'
@@ -345,8 +330,6 @@ getTimeZoneInfo=: 3 : 0
 
   tzstatus;tzbias;<tzinfo
 )
-
-
 NB. =========================================================
 NB. Export to z locale
 fmtTime_z_ =: fmtTime_rgsdatetime_
@@ -360,4 +343,3 @@ tsPlus_z_=: tsPlus_rgsdatetime_
 tsMinus_z_=: tsMinus_rgsdatetime_
 daysDiff_z_=: daysDiff_rgsdatetime_
 tsDiff_z_=: tsDiff_rgsdatetime_
-
