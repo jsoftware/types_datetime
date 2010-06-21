@@ -59,7 +59,7 @@ NB. Add another 0.5 to get true Julian Day number where noon is
 NB. regarded as the "start" of the day.
 toJulian=: +&J0Date
 
-NB.*fromJulian v converts Julian day number to J day number
-NB. eg: fromJulian toJulian tDayNumber 6!:0 ''
+NB.*toJdayno v converts Julian day number to J day number
+NB. eg: toJdayno toJulian toDayNumber 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
 toJdayno=: -&J0Date

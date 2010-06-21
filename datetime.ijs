@@ -5,7 +5,8 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings numeric'
+require 'dates dll strings '
+NB. 'numeric'
 
 coclass 'rgsdatetime'
 
@@ -154,8 +155,8 @@ NB. Add another 0.5 to get true Julian Day number where noon is
 NB. regarded as the "start" of the day.
 toJulian=: +&J0Date
 
-NB.*fromJulian v converts Julian day number to J day number
-NB. eg: fromJulian toJulian tDayNumber 6!:0 ''
+NB.*toJdayno v converts Julian day number to J day number
+NB. eg: toJdayno toJulian toDayNumber 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
 toJdayno=: -&J0Date
 NB. =========================================================
