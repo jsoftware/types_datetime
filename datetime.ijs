@@ -5,8 +5,7 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings '
-NB. 'numeric'
+require 'dates dll strings numeric'
 
 coclass 'rgsdatetime'
 
@@ -190,7 +189,7 @@ NB. result: numeric array of time difference for x-y in <Y M D h m s> format
 NB. y is: numeric start date,time in <Y M D h m s> format
 NB. x is: numeric end date,time in <Y M D h m s> format
 tsDiff=: 4 : 0
-  r=. -/"2 d=. _12 (_6&([\)) \ , x ,"1 y
+  r=. -/"2 d=. _12 (_6&([\)) \ , x ,&(6&{.)"1 y
   if. #i=. I. (+./"1) 0 > _3{."1 r do. NB. negative time
     n=. <i;2 3 4 5
     r=. (]&.(0 24 60 60&#.) n{r) n} r
