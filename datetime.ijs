@@ -5,7 +5,8 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings numeric'
+require 'dates dll strings'
+NB. require 'numeric'  NB. round is defined in numeric but is not yet in J7
 
 coclass 'rgsdatetime'
 
@@ -22,6 +23,7 @@ NB. Note that the first date supported by Microsoft Excel is 1900 1 1
 NB. but dates between 1900 1 1 and 1900 1 28 will not convert properly
 NB. because Excel incorrectly denotes 1900 as a leap year, 
 NB. http://support.microsoft.com/kb/214326
+
 Linux0DateTime=: 62091 NB. add to Linux-style date to get a J dayno
 
 WKDAYS=: ;:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'
@@ -48,8 +50,11 @@ escaped=: 3 : 0
   (-.mskesc)&# &.> mskunescaped;y       NB. compress out unescaped x
 )
 
-fmt=: 8!:0
+NB.*round v round y to nearest x (e.g. 1000 round 12345)
+NB. from j602 numeric script (which is not yet available in j7)
+round=: [ * [: <. 0.5 + %~
 
+fmt=: 8!:0
 
 NB.*getDateFormats v returns boxed table of all formatted date components
 NB. y is: numeric array of [fractional] day numbers
@@ -206,6 +211,7 @@ tsDiff=: 4 : 0
   end.
   ($y) $, r
 )
+
 NB. =========================================================
 NB. Verbs for formating string representations of Dates and Times
  
@@ -301,10 +307,12 @@ NB.    * decimal: YYY, MMM, DDD, hhh, mmm, sss
 NB.    * round (to nearest unit): YY, MM, DD, hh, mm, ss
 NB.    * truncate (only complete units): Y, M, D, h, m, s
 NB.!! TO DO
+
 NB. =========================================================
 NB. Verbs for reading string representations of Dates and Times
 
 NB.!! to do
+
 NB. =========================================================
 NB. Verbs for working with time zones
 require 'dll'
