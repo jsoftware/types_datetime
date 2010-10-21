@@ -13,18 +13,21 @@ coclass 'rgsdatetime'
 NB. =========================================================
 NB. Constants
 
-J0Date=: 2378497   NB. add to J's dayno to get Julian dayno
-NB. Note that the start of a Julian day is noon so for an 
-NB. accurate representation of a Julian day/time combination 
-NB. 2378496.5 should be added instead.
+NB.*J0Date n Add to J's dayno to get Julian dayno
+NB. Note that for astronomical use the start of a Julian day
+NB. is noon so for an accurate representation of a Julian day/time
+NB. combination 2378496.5 should be added instead.
+J0Date=: 2378497
 
-MS0Date=: 36522  NB. add to Microsoft date to get a J dayno.
+NB.*MS0Date n Add to Microsoft date to get a J dayno
 NB. Note that the first date supported by Microsoft Excel is 1900 1 1
 NB. but dates between 1900 1 1 and 1900 1 28 will not convert properly
 NB. because Excel incorrectly denotes 1900 as a leap year, 
 NB. http://support.microsoft.com/kb/214326
+MS0Date=: 36522  NB. 
 
-Linux0DateTime=: 62091 NB. add to Linux-style date to get a J dayno
+NB.*Linux0DateTime n Add to Linux-style date to get a J dayno
+Linux0DateTime=: 62091 
 
 WKDAYS=: ;:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'
 MONTHS=: ''; ;:'January February March April May June July August September October November December'
@@ -33,7 +36,7 @@ TIMECODES=: ;:'d h hh m mm s ss sss c cc ccc p pp'
 NB. =========================================================
 NB. Utility verbs
 
-NB.*escaped v process an escaped string
+NB. escaped v process an escaped string
 NB. eg: '\' escaped '\Date is: D\\MM\\YYYY'
 NB. result: 2-item list of boxed mask & string:
 NB.          0{:: boolean mask of non-escaped characters
@@ -50,13 +53,13 @@ escaped=: 3 : 0
   (-.mskesc)&# &.> mskunescaped;y       NB. compress out unescaped x
 )
 
-NB.*round v round y to nearest x (e.g. 1000 round 12345)
+NB. round v round y to nearest x (e.g. 1000 round 12345)
 NB. from j602 numeric script (which is not yet available in j7)
 round=: [ * [: <. 0.5 + %~
 
 fmt=: 8!:0
 
-NB.*getDateFormats v returns boxed table of all formatted date components
+NB. getDateFormats v returns boxed table of all formatted date components
 NB. y is: numeric array of [fractional] day numbers
 NB. could have give desired components as optional left arg then
 NB. for loop through each component using a select case to build
@@ -75,7 +78,7 @@ getDateFormats=: 3 : 0
   values=. values, (2&}.&.> ,: ]) fmt t
 )
 
-NB.*getTimeFormats v returns boxed array of all formatted time components
+NB. getTimeFormats v returns boxed array of all formatted time components
 NB. y is: numeric array of fractional day numbers
 getTimeFormats=: 3 : 0
   0 0 0 getTimeFormats y
@@ -101,16 +104,16 @@ getTimeFormats=: 3 : 0
 NB. =========================================================
 NB. Verbs for converting between dates and daynumbers
 
-NB.*toDayNumber v Extends verb "todayno" to handle time
-NB. eg: toDayNumber 6!:0 ''
-NB. result: numeric array as J daynos, decimals represent time
+NB.*toDayNo v Extends verb "todayno" to handle time
+NB. eg: toDayNo 6!:0 ''
+NB. result: numeric array as J day numbers, decimals represent time
 NB. y is: numeric array in date/time format specified by x
 NB. x is: optional boolean specifying input format. Default 0.
 NB.      0 : date/time format <yyyy mm dd hh mm ss.sss>
 NB.      1 : date/time format <yyyymmdd.hhmmss.sss>
 NB. Dates before 1800 1 1 are not supported
-toDayNumber=: 3 : 0
-  0 toDayNumber y
+toDayNo=: 3 : 0
+  0 toDayNo y
 :
   ymd=. y
   if. x do.                      NB. form <yyyymmdd.hhmmss>
@@ -128,7 +131,7 @@ toDayNumber=: 3 : 0
 )
 
 NB.*toDateTime v Extends verb "todate" to handle time
-NB. eg: 1 toDateTime toDayNumber 6!:0 ''
+NB. eg: 1 toDateTime toDayNo 6!:0 ''
 NB. result: numeric array in date/time format specified by x
 NB. y is: array of J day numbers
 NB. x is: optional boolean specifying output format. Default 0.
@@ -152,17 +155,17 @@ toDateTime=: 3 : 0
   ymd
 )
 
-NB.*toJulian v converts J day number to Julian day number
-NB. eg: toJulian toDayNumber 6!:0 ''
+NB.*toJulian v Converts J day number to Julian day number
+NB. eg: toJulian toDayNo 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
 NB. Add another 0.5 to get true Julian Day number where noon is
 NB. regarded as the "start" of the day.
 toJulian=: +&J0Date
 
-NB.*toJdayno v converts Julian day number to J day number
-NB. eg: toJdayno toJulian toDayNumber 6!:0 ''
+NB.*fromJulian v Converts Julian day number to J day number
+NB. eg: fromJulian toJulian toDayNo 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
-toJdayno=: -&J0Date
+fromJulian=: -&J0Date
 NB. =========================================================
 NB. Verbs for date and time arithmetic
 
@@ -172,7 +175,7 @@ NB. eg: 2009 2 28 20 30 0 tsPlus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
 NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
 NB. y is: array of numeric time(s) to add to x. Format: [[[[[Y] M] D] h] m] s
 NB. x is: array of numeric timestamps to add y to. Format: Y [M [D [h [m [s]]]]]
-tsPlus=: [: toDateTime@toDayNumber (6&{.@[ + _6&{.@])"1
+tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
 
 NB.*tsMinus v Subtract time (y) from timestamp (x)
 NB. eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
@@ -186,9 +189,9 @@ NB. form: endtimestamp daysDiff starttimestamp
 NB. result: numeric array of time difference for x-y in <Days.fraction of days> format
 NB. y is: numeric start date,time in <Y M D h m s> format
 NB. x is: numeric end date,time in <Y M D h m s> format
-daysDiff=: -&toDayNumber
+daysDiff=: -&toDayNo
 
-NB.tsDiff v Time periods elapsed <Y M D H m s> from timestamp y to timestamp x
+NB.*tsDiff v Time periods elapsed <Y M D H m s> from timestamp y to timestamp x
 NB. form: endtimestamp tsDiff starttimestamp
 NB. result: numeric array of time difference for x-y in <Y M D h m s> format
 NB. y is: numeric start date,time in <Y M D h m s> format
@@ -211,7 +214,6 @@ tsDiff=: 4 : 0
   end.
   ($y) $, r
 )
-
 NB. =========================================================
 NB. Verbs for formating string representations of Dates and Times
  
@@ -307,12 +309,10 @@ NB.    * decimal: YYY, MMM, DDD, hhh, mmm, sss
 NB.    * round (to nearest unit): YY, MM, DD, hh, mm, ss
 NB.    * truncate (only complete units): Y, M, D, h, m, s
 NB.!! TO DO
-
 NB. =========================================================
 NB. Verbs for reading string representations of Dates and Times
 
 NB.!! to do
-
 NB. =========================================================
 NB. Verbs for working with time zones
 require 'dll'
@@ -343,10 +343,10 @@ NB. Export to z locale
 fmtTime_z_ =: fmtTime_rgsdatetime_
 fmtDate_z_ =: fmtDate_rgsdatetime_
 fmtDateTime_z_ =: fmtDateTime_rgsdatetime_
-toDayNumber_z_ =: toDayNumber_rgsdatetime_
+toDayNo_z_ =: toDayNo_rgsdatetime_
 toDateTime_z_ =: toDateTime_rgsdatetime_
 toJulian_z_ =: toJulian_rgsdatetime_
-toJdayno_z_=: toJdayno_rgsdatetime_
+fromJulian_z_=: fromJulian_rgsdatetime_
 tsPlus_z_=: tsPlus_rgsdatetime_
 tsMinus_z_=: tsMinus_rgsdatetime_
 daysDiff_z_=: daysDiff_rgsdatetime_

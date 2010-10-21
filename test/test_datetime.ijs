@@ -22,20 +22,20 @@ tsttimefmt2=: '04:49:26:400';'01:56:38:400';'05:54:14:400'           NB.'hh:mm:s
 
 test=: 3 : 0
   NB. date / day number conversion
-  assert 1e_8 > | tdayno - toDayNumber ttime
+  assert 1e_8 > | tdayno - toDayNo ttime
   assert 1e_8 > | ttime - toDateTime tdayno
-  assert 1e_8 > | ttime - toDateTime toJdayno toJulian toDayNumber ttime
-  assert 1e_7 > | (toDayNumber ttime) - 1 toDayNumber 1&toDateTime toDayNumber ttime
+  assert 1e_8 > | ttime - toDateTime fromJulian toJulian toDayNo ttime
+  assert 1e_7 > | (toDayNo ttime) - 1 toDayNo 1&toDateTime toDayNo ttime
 
   NB. date/time formating
-  assert 'September 19, 2009' -: fmtDate toDayNumber ttime
-  assert 'Saturday, 19 September 2009' -: 'DDDD, D MMMM YYYY' fmtDate toDayNumber ttime
-  assert 'Day: 19, Month: 9, Year: 09' -: '\Day: D, \Month: M, Year: YY' fmtDate toDayNumber ttime
-  assert 'Sat, Sep 19, 2009' -: 'DDD, MMM DD, YYYY' fmtDate toDayNumber ttime
-  assert '19/09/2009' -: 'DD/MM/YYYY' fmtDate toDayNumber ttime
+  assert 'September 19, 2009' -: fmtDate toDayNo ttime
+  assert 'Saturday, 19 September 2009' -: 'DDDD, D MMMM YYYY' fmtDate toDayNo ttime
+  assert 'Day: 19, Month: 9, Year: 09' -: '\Day: D, \Month: M, Year: YY' fmtDate toDayNo ttime
+  assert 'Sat, Sep 19, 2009' -: 'DDD, MMM DD, YYYY' fmtDate toDayNo ttime
+  assert '19/09/2009' -: 'DD/MM/YYYY' fmtDate toDayNo ttime
   assert tstdatefmt -: 'DD/MM/YYYY' fmtDate tstdayno
   assert ($ -: $@fmtDate) 3 4 5 $ tstdayno
-  assert '19/9/09' -: 'D/M/YY' fmtDate toDayNumber ttime
+  assert '19/9/09' -: 'D/M/YY' fmtDate toDayNo ttime
   assert '6:39:56 pm' -: fmtTime 0 60 60#. _3{. ttime
   assert '18:39:56' -: 'hh:mm:ss' fmtTime 0 60 60#. _3{. ttime
   assert tsttimefmt0 -: fmtTime 86400 * 1|| tstdayno
@@ -46,14 +46,14 @@ test=: 3 : 0
 
   NB. date/time arithmetic
   diff=. 2009 2 17 3 5 16 daysDiff 2008 10 20 14 26 14
-  assert 2009 2 17 3 5 16 -: toDateTime diff + toDayNumber 2008 10 20 14 26 14
+  assert 2009 2 17 3 5 16 -: toDateTime diff + toDayNo 2008 10 20 14 26 14
   assert 0 3 27 12 39 2 -: 2009 2 17 3 5 16 tsDiff 2008 10 20 14 26 14
   assert 0 3 27 13 -: 2009 2 17 3 tsDiff 2008 10 20 14
   assert 0 3 28 -: 2009 2 17 tsDiff 2008 10 20
   assert 2009 2 17 3 5 16 -: 2008 10 20 14 26 14 tsPlus 0 3 27 12 39 2
   assert 2008 10 20 14 26 14 -: 2009 2 17 3 5 16 tsMinus 0 3 27 12 39 2
   assert 2009 1 20 11 20 58 -: 2009 2 17 tsMinus 27 12 39 2
-  assert '20090120.1120580' -: 0j7 ": 1 toDateTime toDayNumber 2009 2 17 tsMinus 27 12 39 2
+  assert '20090120.1120580' -: 0j7 ": 1 toDateTime toDayNo 2009 2 17 tsMinus 27 12 39 2
   assert 4 5 6 -: $(4 5 3$2009 2 17) tsMinus 27 12 39 2
   assert 2009 1 20 11 20 58 ="1 (4 5 3$2009 2 17) tsMinus 27 12 39 2
 

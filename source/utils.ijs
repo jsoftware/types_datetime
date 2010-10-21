@@ -1,7 +1,7 @@
 NB. =========================================================
 NB. Utility verbs
 
-NB.*escaped v process an escaped string
+NB. escaped v process an escaped string
 NB. eg: '\' escaped '\Date is: D\\MM\\YYYY'
 NB. result: 2-item list of boxed mask & string:
 NB.          0{:: boolean mask of non-escaped characters
@@ -18,10 +18,13 @@ escaped=: 3 : 0
   (-.mskesc)&# &.> mskunescaped;y       NB. compress out unescaped x
 )
 
+NB. round v round y to nearest x (e.g. 1000 round 12345)
+NB. from j602 numeric script (which is not yet available in j7)
+round=: [ * [: <. 0.5 + %~
+
 fmt=: 8!:0
 
-
-NB.*getDateFormats v returns boxed table of all formatted date components
+NB. getDateFormats v returns boxed table of all formatted date components
 NB. y is: numeric array of [fractional] day numbers
 NB. could have give desired components as optional left arg then
 NB. for loop through each component using a select case to build
@@ -40,7 +43,7 @@ getDateFormats=: 3 : 0
   values=. values, (2&}.&.> ,: ]) fmt t
 )
 
-NB.*getTimeFormats v returns boxed array of all formatted time components
+NB. getTimeFormats v returns boxed array of all formatted time components
 NB. y is: numeric array of fractional day numbers
 getTimeFormats=: 3 : 0
   0 0 0 getTimeFormats y

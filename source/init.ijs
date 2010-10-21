@@ -5,24 +5,29 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings numeric'
+require 'dates dll strings'
+NB. require 'numeric'  NB. round is defined in numeric but is not yet in J7
 
 coclass 'rgsdatetime'
 
 NB. =========================================================
 NB. Constants
 
-J0Date=: 2378497   NB. add to J's dayno to get Julian dayno
-NB. Note that the start of a Julian day is noon so for an 
-NB. accurate representation of a Julian day/time combination 
-NB. 2378496.5 should be added instead.
+NB.*J0Date n Add to J's dayno to get Julian dayno
+NB. Note that for astronomical use the start of a Julian day
+NB. is noon so for an accurate representation of a Julian day/time
+NB. combination 2378496.5 should be added instead.
+J0Date=: 2378497
 
-MS0Date=: 36522  NB. add to Microsoft date to get a J dayno.
+NB.*MS0Date n Add to Microsoft date to get a J dayno
 NB. Note that the first date supported by Microsoft Excel is 1900 1 1
 NB. but dates between 1900 1 1 and 1900 1 28 will not convert properly
 NB. because Excel incorrectly denotes 1900 as a leap year, 
 NB. http://support.microsoft.com/kb/214326
-Linux0DateTime=: 62091 NB. add to Linux-style date to get a J dayno
+MS0Date=: 36522  NB. 
+
+NB.*Linux0DateTime n Add to Linux-style date to get a J dayno
+Linux0DateTime=: 62091 
 
 WKDAYS=: ;:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'
 MONTHS=: ''; ;:'January February March April May June July August September October November December'

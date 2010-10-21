@@ -1,16 +1,16 @@
 NB. =========================================================
 NB. Verbs for converting between dates and daynumbers
 
-NB.*toDayNumber v Extends verb "todayno" to handle time
-NB. eg: toDayNumber 6!:0 ''
-NB. result: numeric array as J daynos, decimals represent time
+NB.*toDayNo v Extends verb "todayno" to handle time
+NB. eg: toDayNo 6!:0 ''
+NB. result: numeric array as J day numbers, decimals represent time
 NB. y is: numeric array in date/time format specified by x
 NB. x is: optional boolean specifying input format. Default 0.
 NB.      0 : date/time format <yyyy mm dd hh mm ss.sss>
 NB.      1 : date/time format <yyyymmdd.hhmmss.sss>
 NB. Dates before 1800 1 1 are not supported
-toDayNumber=: 3 : 0
-  0 toDayNumber y
+toDayNo=: 3 : 0
+  0 toDayNo y
 :
   ymd=. y
   if. x do.                      NB. form <yyyymmdd.hhmmss>
@@ -28,7 +28,7 @@ toDayNumber=: 3 : 0
 )
 
 NB.*toDateTime v Extends verb "todate" to handle time
-NB. eg: 1 toDateTime toDayNumber 6!:0 ''
+NB. eg: 1 toDateTime toDayNo 6!:0 ''
 NB. result: numeric array in date/time format specified by x
 NB. y is: array of J day numbers
 NB. x is: optional boolean specifying output format. Default 0.
@@ -52,14 +52,14 @@ toDateTime=: 3 : 0
   ymd
 )
 
-NB.*toJulian v converts J day number to Julian day number
-NB. eg: toJulian toDayNumber 6!:0 ''
+NB.*toJulian v Converts J day number to Julian day number
+NB. eg: toJulian toDayNo 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
 NB. Add another 0.5 to get true Julian Day number where noon is
 NB. regarded as the "start" of the day.
 toJulian=: +&J0Date
 
-NB.*toJdayno v converts Julian day number to J day number
-NB. eg: toJdayno toJulian toDayNumber 6!:0 ''
+NB.*fromJulian v Converts Julian day number to J day number
+NB. eg: fromJulian toJulian toDayNo 6!:0 ''
 NB. Dates before 1800 1 1 are not supported
-toJdayno=: -&J0Date
+fromJulian=: -&J0Date
