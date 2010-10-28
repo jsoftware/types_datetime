@@ -234,7 +234,8 @@ fmtDate=: 3 : 0
   codes=. DATECODES
   pic=. x
   'unesc pic'=. '\' escaped pic
-  pic=. (1 , 2 ~:/\unesc *. pic e. ~.;codes) <;.1 pic  NB. Cut into tokens
+  msk=. (>./ (I. -.unesc)} ]) pic i.~ ~.;codes
+  pic=. (1 , 2 ~:/\ msk) <;.1 pic                      NB. Cut into tokens
   var=. pic e. codes                                   NB. mark sections as vars
 
   values=. getDateFormats y
@@ -265,7 +266,8 @@ fmtTime=: 3 : 0
   pic=. x
   'unesc pic'=. '\' escaped pic
   dcp=. 'dcp' e. pic                                     NB. are days, millisecs, am/pm present
-  pic=. (1 , 2 ~:/\unesc *. pic e. ~.;codes) <;.1 pic    NB. Cut into tokens
+  msk=. (>./ (I. -.unesc)} ]) pic i.~ ~.;codes
+  pic=. (1 , 2 ~:/\ msk) <;.1 pic                      NB. Cut into tokens
   var=. pic e. codes                                     NB. mark sections as vars
   
   values=. dcp getTimeFormats y % 86400
@@ -283,7 +285,8 @@ fmtDateTime=: 3 : 0
   pic=. x
   'unesc pic'=. '\' escaped pic
   dcp=. 'dcp' e. pic                                     NB. are days, millisecs, am/pm present
-  pic=. (1 , 2 ~:/\unesc *. pic e. ~.;codes) <;.1 pic    NB. Cut into tokens
+  msk=. (>./ (I. -.unesc)} ]) pic i.~ ~.;codes
+  pic=. (1 , 2 ~:/\ msk) <;.1 pic                      NB. Cut into tokens
   var=. pic e. codes                                     NB. mark sections as vars
 
   values=. getDateFormats y
