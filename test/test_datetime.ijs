@@ -52,6 +52,7 @@ test=: 3 : 0
   assert 0 3 27 13 -: 2009 2 17 3 tsDiff 2008 10 20 14
   assert 0 3 28 -: 2009 2 17 tsDiff 2008 10 20
   assert 2009 2 17 3 5 16 -: 2008 10 20 14 26 14 tsPlus 0 3 27 12 39 2
+  assert 2011 4 1 0 0 0 -: 2010 1 1 tsPlus 15 0 0 0 0
   assert 2008 10 20 14 26 14 -: 2009 2 17 3 5 16 tsMinus 0 3 27 12 39 2
   assert 2009 1 20 11 20 58 -: 2009 2 17 tsMinus 27 12 39 2
   assert '20090120.1120580' -: 0j7 ": 1 toDateTime toDayNo 2009 2 17 tsMinus 27 12 39 2

@@ -175,7 +175,9 @@ NB. eg: 2009 2 28 20 30 0 tsPlus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
 NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
 NB. y is: array of numeric time(s) to add to x. Format: [[[[[Y] M] D] h] m] s
 NB. x is: array of numeric timestamps to add y to. Format: Y [M [D [h [m [s]]]]]
-tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
+NB. tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
+adjustYrMth=. 2&}. ,~ [: ]&.:(0 12&#.) 2&{.
+tsPlus=: [: toDateTime@toDayNo (6&{.@[ + adjustYrMth@(_6&{.@]))"1 f.
 
 NB.*tsMinus v Subtract time (y) from timestamp (x)
 NB. eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
