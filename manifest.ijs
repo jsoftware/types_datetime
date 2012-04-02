@@ -14,7 +14,7 @@ VERSION=: '1.0.3'
 
 RELEASE=: 'j602 j701'
 
-PLATFORMS=: 'win linux darwin'
+PLATFORMS=: ''
 
 FILES=: 0 : 0
 history.txt
