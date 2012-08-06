@@ -5,7 +5,7 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings'
+require 'dates dll strings numeric'
 NB. require 'numeric'  NB. round is defined in numeric but is not yet in J7
 
 coclass 'rgsdatetime'
@@ -14,16 +14,16 @@ NB. =========================================================
 NB. Constants
 
 NB.*J0Date n Add to J's dayno to get Julian dayno
-NB. Note that for astronomical use the start of a Julian day
-NB. is noon so for an accurate representation of a Julian day/time
-NB. combination 2378496.5 should be added instead.
+NB.-note: Note that for astronomical use the start of a Julian day
+NB.- is noon so for an accurate representation of a Julian day/time
+NB.- combination 2378496.5 should be added instead.
 J0Date=: 2378497
 
 NB.*MS0Date n Add to Microsoft date to get a J dayno
-NB. Note that the first date supported by Microsoft Excel is 1900 1 1
-NB. but dates between 1900 1 1 and 1900 1 28 will not convert properly
-NB. because Excel incorrectly denotes 1900 as a leap year, 
-NB. http://support.microsoft.com/kb/214326
+NB.-note: Note that the first date supported by Microsoft Excel is 1900 1 1
+NB.- but dates between 1900 1 1 and 1900 1 28 will not convert properly
+NB.- because Excel incorrectly denotes 1900 as a leap year, 
+NB.- http://support.microsoft.com/kb/214326
 MS0Date=: 36522  NB. 
 
 NB.*Linux0DateTime n Add to Linux-style date to get a J dayno
@@ -105,13 +105,13 @@ NB. =========================================================
 NB. Verbs for converting between dates and daynumbers
 
 NB.*toDayNo v Extends verb "todayno" to handle time
-NB. eg: toDayNo 6!:0 ''
-NB. result: numeric array as J day numbers, decimals represent time
-NB. y is: numeric array in date/time format specified by x
-NB. x is: optional boolean specifying input format. Default 0.
-NB.      0 : date/time format <yyyy mm dd hh mm ss.sss>
-NB.      1 : date/time format <yyyymmdd.hhmmss.sss>
-NB. Dates before 1800 1 1 are not supported
+NB.-eg: toDayNo 6!:0 ''
+NB.-result: numeric array as J day numbers, decimals represent time
+NB.-y: numeric array in date/time format specified by x
+NB.-x: optional boolean specifying input format. Default 0.
+NB.-    0 : date/time format <yyyy mm dd hh mm ss.sss>
+NB.-    1 : date/time format <yyyymmdd.hhmmss.sss>
+NB.-note: Dates before 1800 1 1 are not supported
 toDayNo=: 3 : 0
   0 toDayNo y
 :
@@ -131,13 +131,13 @@ toDayNo=: 3 : 0
 )
 
 NB.*toDateTime v Extends verb "todate" to handle time
-NB. eg: 1 toDateTime toDayNo 6!:0 ''
-NB. result: numeric array in date/time format specified by x
-NB. y is: array of J day numbers
-NB. x is: optional boolean specifying output format. Default 0.
-NB.      0 : date/time format <yyyy mm dd hh mm ss.sss>
-NB.      1 : date/time format <yyyymmdd.hhmmss.sss>
-NB. Dates before 1800 1 1 are not supported
+NB.-eg: 1 toDateTime toDayNo 6!:0 ''
+NB.-result: numeric array in date/time format specified by x
+NB.-y: array of J day numbers
+NB.-x: optional boolean specifying output format. Default 0.
+NB.     0 : date/time format <yyyy mm dd hh mm ss.sss>
+NB.-    1 : date/time format <yyyymmdd.hhmmss.sss>
+NB.-note: Dates before 1800 1 1 are not supported
 toDateTime=: 3 : 0
   0 toDateTime y
 :
@@ -156,48 +156,49 @@ toDateTime=: 3 : 0
 )
 
 NB.*toJulian v Converts J day number to Julian day number
-NB. eg: toJulian toDayNo 6!:0 ''
-NB. Dates before 1800 1 1 are not supported
-NB. Add another 0.5 to get true Julian Day number where noon is
-NB. regarded as the "start" of the day.
+NB.-eg: toJulian toDayNo 6!:0 ''
+NB.-note: Dates before 1800 1 1 are not supported
+NB.- Add another 0.5 to get true Julian Day number where noon is
+NB.- regarded as the "start" of the day.
 toJulian=: +&J0Date
 
 NB.*fromJulian v Converts Julian day number to J day number
-NB. eg: fromJulian toJulian toDayNo 6!:0 ''
-NB. Dates before 1800 1 1 are not supported
+NB.-eg: fromJulian toJulian toDayNo 6!:0 ''
+NB.-note: Dates before 1800 1 1 are not supported
 fromJulian=: -&J0Date
 NB. =========================================================
 NB. Verbs for date and time arithmetic
 
-NB.*tsPlus v Adds time (y) to timestamp (x)
-NB. eg: 2009 2 28 20 30 0 tsPlus 5 0 0     NB. add 5 hours to timestamp
-NB. eg: 2009 2 28 20 30 0 tsPlus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
-NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
-NB. y is: array of numeric time(s) to add to x. Format: [[[[[Y] M] D] h] m] s
-NB. x is: array of numeric timestamps to add y to. Format: Y [M [D [h [m [s]]]]]
-NB. tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
 adjustYrMth=. 2&}. ,~ [: ]&.:(0 12&#.) 2&{.
+
+NB.*tsPlus v Adds time (y) to timestamp (x)
+NB.-eg: 2009 2 28 20 30 0 tsPlus 5 0 0     NB. add 5 hours to timestamp
+NB.- 2009 2 28 20 30 0 tsPlus 34 5 0 0  NB. add 34 days, 5 hours to timestamp
+NB.-result: array of resulting numeric timestamp(s) in <Y M D h m s> format
+NB.-y: array of numeric time(s) to add to x. Format: [[[[[Y] M] D] h] m] s
+NB.-x: array of numeric timestamps to add y to. Format: Y [M [D [h [m [s]]]]]
 tsPlus=: [: toDateTime@toDayNo (6&{.@[ + adjustYrMth@(_6&{.@]))"1 f.
+NB. tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
 
 NB.*tsMinus v Subtract time (y) from timestamp (x)
-NB. eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
-NB. result: array of resulting numeric timestamp(s) in <Y M D h m s> format
-NB. y is: array of numeric time(s) to subtract from x. Format: [[[[[Y] M] D] h] m] s
-NB. x is: array of numeric timestamps to subtract y from. Format: Y [M [D [h [m [s]]]]]
+NB.-eg: 2009 3 1 1 30 0 tsMinus 5 0 0   NB. subtract 5 hours from timestamp
+NB.-result: array of resulting numeric timestamp(s) in <Y M D h m s> format
+NB.-y: array of numeric time(s) to subtract from x. Format: [[[[[Y] M] D] h] m] s
+NB.-x: array of numeric timestamps to subtract y from. Format: Y [M [D [h [m [s]]]]]
 tsMinus=: tsPlus -
 
 NB.*daysDiff v Difference in days from timestamp y to timestamp x
-NB. form: endtimestamp daysDiff starttimestamp
-NB. result: numeric array of time difference for x-y in <Days.fraction of days> format
-NB. y is: numeric start date,time in <Y M D h m s> format
-NB. x is: numeric end date,time in <Y M D h m s> format
+NB.-usage: endtimestamp daysDiff starttimestamp
+NB.-result: numeric array of time difference for x-y in <Days.fraction of days> format
+NB.-y: numeric start date,time in <Y M D h m s> format
+NB.-x: numeric end date,time in <Y M D h m s> format
 daysDiff=: -&toDayNo
 
 NB.*tsDiff v Time periods elapsed <Y M D H m s> from timestamp y to timestamp x
-NB. form: endtimestamp tsDiff starttimestamp
-NB. result: numeric array of time difference for x-y in <Y M D h m s> format
-NB. y is: numeric start date,time in <Y M D h m s> format
-NB. x is: numeric end date,time in <Y M D h m s> format
+NB.-usage: endtimestamp tsDiff starttimestamp
+NB.-result: numeric array of time difference for x-y in <Y M D h m s> format
+NB.-y: numeric start date,time in <Y M D h m s> format
+NB.-x: numeric end date,time in <Y M D h m s> format
 tsDiff=: 4 : 0
   r=. -/"2 d=. _12 (_6&([\)) \ , x ,&(6&{.)"1 y
   if. #i=. I. (+./"1) 0 > _3{."1 r do. NB. negative time
@@ -220,16 +221,16 @@ NB. =========================================================
 NB. Verbs for formating string representations of Dates and Times
  
 NB.*fmtDate v Format a date in a given format
-NB. eg: '\Date is: DDDD, D MMM, YYYY' fmtDate toDayNumber 6!:0''
-NB. result: formated date string (or array of boxed, formated date strings)
-NB. y is: numeric array of dates given as Day Numbers
-NB. x is: optional format string specifing format of result
-NB.      Use the following codes to specify the date format:
-NB.      D: 1   DD: 01   DDD: Sun   DDDD: Sunday
-NB.      M: 1   MM: 01   MMM: Jan   MMMM: January
-NB.             YY: 09              YYYY: 2009
-NB.     To display any of the letters (DMY) that are codes, 
-NB.     "escape" them with '\'
+NB.-eg: '\Date is: DDDD, D MMM, YYYY' fmtDate toDayNumber 6!:0''
+NB.-result: formated date string (or array of boxed, formated date strings)
+NB.-y: numeric array of dates given as Day Numbers
+NB.-x: optional format string specifing format of result
+NB.-    Use the following codes to specify the date format:
+NB.-    D: 1   DD: 01   DDD: Sun   DDDD: Sunday
+NB.-    M: 1   MM: 01   MMM: Jan   MMMM: January
+NB.-           YY: 09              YYYY: 2009
+NB.-   To display any of the letters (DMY) that are codes, 
+NB.-   "escape" them with '\'
 fmtDate=: 3 : 0
   'MMMM D, YYYY' fmtDate y
   :
@@ -248,19 +249,19 @@ fmtDate=: 3 : 0
 )
 
 NB.*fmtTime v Format a time (in seconds) in a given format.
-NB. eg: 'Ti\me i\s: hh:mm:ss' fmtTime 86400 * 1|toDayNumber 6!:0 ''
-NB. result: formated time string (or array of boxed, formated time strings)
-NB. y is: numeric array of times given as time in seconds since start of the day
-NB. x is: optional format string specifing format of result
-NB.      Use the following codes to specify the date format:
-NB.      days ("d"), hours ("h"), minutes ("m"), seconds ("s"), 
-NB.      fractions of a second ("c"), or AM/PM designator ("p"):
-NB.     d: 1    h: 1    m: 1    s: 1      c: 1       p: a
-NB.            hh: 01  mm: 01  ss: 01    cc: 01     pp: am
-NB.                           sss: 1.2  ccc: 001
-NB.     If no "p" designator is present, 24 hour format is used.
-NB.     To display any of the letters (dhmscp) that are codes, 
-NB.     "escape" them with '\'
+NB.-eg: 'Ti\me i\s: hh:mm:ss' fmtTime 86400 * 1|toDayNumber 6!:0 ''
+NB.-result: formated time string (or array of boxed, formated time strings)
+NB.-y: numeric array of times given as time in seconds since start of the day
+NB.-x: optional format string specifing format of result
+NB.-    Use the following codes to specify the date format:
+NB.     days ("d"), hours ("h"), minutes ("m"), seconds ("s"), 
+NB.-    fractions of a second ("c"), or AM/PM designator ("p"):
+NB.-    d: 1    h: 1    m: 1    s: 1      c: 1       p: a
+NB.-           hh: 01  mm: 01  ss: 01    cc: 01     pp: am
+NB.-                          sss: 1.2  ccc: 001
+NB.-    If no "p" designator is present, 24 hour format is used.
+NB.-    To display any of the letters (dhmscp) that are codes, 
+NB.-    "escape" them with '\'
 fmtTime=: 3 : 0
   'h:mm:ss pp' fmtTime y
   :
@@ -323,11 +324,11 @@ NB. Verbs for working with time zones
 require 'dll'
 
 NB.*getTimeZoneInfo v function to return Windows time zone info
-NB. eg: getTimeZoneInfo ''
-NB. result: 3-item list of boxed info
-NB.    0{:: Daylight saving status (0 unknown, 1 standarddate, 2 daylightdate)
-NB.    1{:: Bias (offset of local zone from UTC in minutes)
-NB.    2{:: 2 by 3 boxed table: Standard,Daylight by Name,StartDate,Bias
+NB.-eg: getTimeZoneInfo ''
+NB.-result: 3-item list of boxed info
+NB.-   0{:: Daylight saving status (0 unknown, 1 standarddate, 2 daylightdate)
+NB.-   1{:: Bias (offset of local zone from UTC in minutes)
+NB.-   2{:: 2 by 3 boxed table: Standard,Daylight by Name,StartDate,Bias
 getTimeZoneInfo=: 3 : 0
   'tzstatus tzinfo'=. 'kernel32 GetTimeZoneInformation i *i'&cd <(,43#0)
   NB. read TIME_ZONE_INFORMATION structure

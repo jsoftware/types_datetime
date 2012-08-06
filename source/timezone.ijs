@@ -3,11 +3,11 @@ NB. Verbs for working with time zones
 require 'dll'
 
 NB.*getTimeZoneInfo v function to return Windows time zone info
-NB. eg: getTimeZoneInfo ''
-NB. result: 3-item list of boxed info
-NB.    0{:: Daylight saving status (0 unknown, 1 standarddate, 2 daylightdate)
-NB.    1{:: Bias (offset of local zone from UTC in minutes)
-NB.    2{:: 2 by 3 boxed table: Standard,Daylight by Name,StartDate,Bias
+NB.-eg: getTimeZoneInfo ''
+NB.-result: 3-item list of boxed info
+NB.-   0{:: Daylight saving status (0 unknown, 1 standarddate, 2 daylightdate)
+NB.-   1{:: Bias (offset of local zone from UTC in minutes)
+NB.-   2{:: 2 by 3 boxed table: Standard,Daylight by Name,StartDate,Bias
 getTimeZoneInfo=: 3 : 0
   'tzstatus tzinfo'=. 'kernel32 GetTimeZoneInformation i *i'&cd <(,43#0)
   NB. read TIME_ZONE_INFORMATION structure
