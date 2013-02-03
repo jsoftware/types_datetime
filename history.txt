@@ -1,11 +1,14 @@
 types/datetime - change history
 
+== 1.0.5 ==
+ * chg: support j801
+
 == 1.0.3 ==
  * fix: handle tsPlus when months add to more than 13
 
 == 1.0.2 ==
  * fix: immediately adjacent format strings are handled correctly
- 
+
 == 1.0.1 ==
  * chg: rename toDayNumber to toDayNo
  * chg: rename toJdayno to fromJulian
