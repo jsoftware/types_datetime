@@ -6,7 +6,6 @@ NB. Some of the verbs in this script were derived from
 NB. APL+Win functions written by Davin Church.
 
 require 'dates dll strings numeric'
-NB. require 'numeric'  NB. round is defined in numeric but is not yet in J7
 
 coclass 'rgsdatetime'
 
@@ -24,11 +23,12 @@ NB.-note: Note that the first date supported by Microsoft Excel is 1900 1 1
 NB.- but dates between 1900 1 1 and 1900 1 28 will not convert properly
 NB.- because Excel incorrectly denotes 1900 as a leap year, 
 NB.- http://support.microsoft.com/kb/214326
-MS0Date=: 36522  NB. 
+MS0Date=: 36522
 
 NB.*Linux0DateTime n Add to Linux-style date to get a J dayno
-Linux0DateTime=: 62091 
+Linux0DateTime=: 62091
 
+NB. Look ups
 WKDAYS=: ;:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'
 MONTHS=: ''; ;:'January February March April May June July August September October November December'
 DATECODES=: ;:'D DD DDD DDDD M MM MMM MMMM YY YYYY'
@@ -52,10 +52,6 @@ escaped=: 3 : 0
   mskunescaped=. -. 0,}: mskesc         NB. unescaped characters
   (-.mskesc)&# &.> mskunescaped;y       NB. compress out unescaped x
 )
-
-NB. round v round y to nearest x (e.g. 1000 round 12345)
-NB. from j602 numeric script (which is not yet available in j7)
-round=: [ * [: <. 0.5 + %~
 
 fmt=: 8!:0
 
@@ -135,7 +131,7 @@ NB.-eg: 1 toDateTime toDayNo 6!:0 ''
 NB.-result: numeric array in date/time format specified by x
 NB.-y: array of J day numbers
 NB.-x: optional boolean specifying output format. Default 0.
-NB.     0 : date/time format <yyyy mm dd hh mm ss.sss>
+NB.-    0 : date/time format <yyyy mm dd hh mm ss.sss>
 NB.-    1 : date/time format <yyyymmdd.hhmmss.sss>
 NB.-note: Dates before 1800 1 1 are not supported
 toDateTime=: 3 : 0
@@ -254,7 +250,7 @@ NB.-result: formated time string (or array of boxed, formated time strings)
 NB.-y: numeric array of times given as time in seconds since start of the day
 NB.-x: optional format string specifing format of result
 NB.-    Use the following codes to specify the date format:
-NB.     days ("d"), hours ("h"), minutes ("m"), seconds ("s"), 
+NB.-    days ("d"), hours ("h"), minutes ("m"), seconds ("s"), 
 NB.-    fractions of a second ("c"), or AM/PM designator ("p"):
 NB.-    d: 1    h: 1    m: 1    s: 1      c: 1       p: a
 NB.-           hh: 01  mm: 01  ss: 01    cc: 01     pp: am

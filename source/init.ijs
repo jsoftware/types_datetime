@@ -5,8 +5,7 @@ NB. Ric Sherlock, 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
-require 'dates dll strings'
-NB. require 'numeric'  NB. round is defined in numeric but is not yet in J7
+require 'dates dll strings numeric'
 
 coclass 'rgsdatetime'
 

@@ -18,10 +18,6 @@ escaped=: 3 : 0
   (-.mskesc)&# &.> mskunescaped;y       NB. compress out unescaped x
 )
 
-NB. round v round y to nearest x (e.g. 1000 round 12345)
-NB. from j602 numeric script (which is not yet available in j7)
-round=: [ * [: <. 0.5 + %~
-
 fmt=: 8!:0
 
 NB. getDateFormats v returns boxed table of all formatted date components
