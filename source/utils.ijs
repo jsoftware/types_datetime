@@ -6,8 +6,8 @@ NB. eg: '\' escaped '\Date is: D\\MM\\YYYY'
 NB. result: 2-item list of boxed mask & string:
 NB.          0{:: boolean mask of non-escaped characters
 NB.          1{:: string with escape character compressed out
-NB. y is: An escaped string
-NB. x is: character used to escape string
+NB. y: An escaped string
+NB. x: character used to escape string
 escaped=: 3 : 0
   '\' escaped y                         NB. default escape char
 :
@@ -21,7 +21,7 @@ escaped=: 3 : 0
 fmt=: 8!:0
 
 NB. getDateFormats v returns boxed table of all formatted date components
-NB. y is: numeric array of [fractional] day numbers
+NB. y: numeric array of [fractional] day numbers
 NB. could have give desired components as optional left arg then
 NB. for loop through each component using a select case to build
 getDateFormats=: 3 : 0
@@ -40,7 +40,7 @@ getDateFormats=: 3 : 0
 )
 
 NB. getTimeFormats v returns boxed array of all formatted time components
-NB. y is: numeric array of fractional day numbers
+NB. y: numeric array of fractional day numbers
 getTimeFormats=: 3 : 0
   0 0 0 getTimeFormats y
 :

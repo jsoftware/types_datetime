@@ -1,7 +1,7 @@
 NB. =========================================================
-NB. types/datetime
-NB. Addon for extending the dates.ijs system script.
-NB. Ric Sherlock, 2009 09 09
+NB.% types/datetime - Addon for extending the dates.ijs system script.
+NB.% Ric Sherlock
+NB.% 2009 09 09
 NB. Some of the verbs in this script were derived from 
 NB. APL+Win functions written by Davin Church.
 
@@ -12,20 +12,20 @@ coclass 'rgsdatetime'
 NB. =========================================================
 NB. Constants
 
-NB.*J0Date n Add to J's dayno to get Julian dayno
-NB.-note: Note that for astronomical use the start of a Julian day
-NB.- is noon so for an accurate representation of a Julian day/time
+NB.*J0Date n Add to J's day number to get Julian day number
+NB.-note: For astronomical use, the start of a [Julian day](http://en.wikipedia.org/wiki/Julian_day)
+NB.- is noon. So for an accurate representation of a Julian day/time
 NB.- combination 2378496.5 should be added instead.
 J0Date=: 2378497
 
-NB.*MS0Date n Add to Microsoft date to get a J dayno
-NB.-note: Note that the first date supported by Microsoft Excel is 1900 1 1
+NB.*MS0Date n Add to Microsoft date to get a J day number
+NB.-note: The first date supported by Microsoft Excel is 1900 1 1
 NB.- but dates between 1900 1 1 and 1900 1 28 will not convert properly
 NB.- because Excel incorrectly denotes 1900 as a leap year, 
-NB.- http://support.microsoft.com/kb/214326
+NB.- <http://support.microsoft.com/kb/214326>
 MS0Date=: 36522
 
-NB.*Linux0DateTime n Add to Linux-style date to get a J dayno
+NB.*Linux0DateTime n Add to Linux-style date to get a J day number
 Linux0DateTime=: 62091
 
 NB. Look ups
