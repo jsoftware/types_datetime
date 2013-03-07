@@ -7,7 +7,7 @@ Convert between day number and dates including times.
 Custom date/time formating.
 Date/time arithmetic.
 
-Extension of dates.ijs script.
+Extends the `dates.ijs` system script.
 )
 
 VERSION=: '1.0.5'
