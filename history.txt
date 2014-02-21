@@ -1,5 +1,8 @@
 types/datetime - change history
 
+== 1.0.6 ==
+ * fix: correctly handle tsPlus when months add to more than 13
+
 == 1.0.5 ==
  * chg: support j801
 
