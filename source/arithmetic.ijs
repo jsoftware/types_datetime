@@ -11,7 +11,7 @@ NB.-y: Array of numeric time(s) to add to *x*.
 NB.-   Format: `[[[[[Y] M] D] h] m] s`
 NB.-x: Array of numeric timestamps to add *y* to.  
 NB.-   Format: `Y [M [D [h [m [s]]]]]`
-tsPlus=: [: toDateTime@toDayNo (6&{.@[ + adjustYrMth@(_6&{.@]))"1 f.
+tsPlus=: [: toDateTime@toDayNo adjustYrMth@(6&{.@[ + _6&{.@])"1 f.
 NB. tsPlus=: [: toDateTime@toDayNo (6&{.@[ + _6&{.@])"1
 
 NB.*tsMinus v Subtract time *y* from timestamp *x*
