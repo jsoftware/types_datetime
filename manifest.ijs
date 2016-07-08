@@ -10,9 +10,9 @@ Date/time arithmetic.
 Extends the `dates.ijs` system script.
 )
 
-VERSION=: '1.0.10'
+VERSION=: '1.0.11'
 
-RELEASE=: 'j602 j701 j801 j802 j803 j804'
+RELEASE=: 'j602 j701 j801 j802 j803 j804 j805'
 
 PLATFORMS=: ''
 
